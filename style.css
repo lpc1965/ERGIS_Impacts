@@ -1,0 +1,423 @@
+html,
+body,
+#viewDiv {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', san-serif;
+}
+
+/*Title Div Styling*/
+
+#titleDiv {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    font-weight: 900;
+    font-size: 30px;
+    color: rgb(36,36,36);
+    text-shadow: 2px 2px #baeb82;
+}
+
+/*Menu Div Styling*/
+
+#optionsDiv {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    background-color: rgb(78, 78, 78);
+    color: white;
+    padding: 20px;
+    /*min-height: 600px;*/
+    max-height: calc(100% - 100px);
+    overflow-y: auto;
+    height: auto;
+    width: 350px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.filterDiv {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.lineDiv {
+    display: flex;
+    align-items: flex-end;
+    height: 21px;
+    padding-top: 10px;
+}
+
+.labelNum{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.line {
+    display: flex;
+    flex-grow: 1;
+    height: 1px;
+    margin-left: 10px;
+    margin-bottom: 8px;
+    background-color: #fff;
+  }
+
+.layerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.labelText {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.labelSubText {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#puidSelect {
+    width: 100%;
+    height: 35px;
+    font-size: 12px;
+    border: 0px;
+    border-radius: 2px;
+}
+
+#lpcFilter {
+    width: 100%;
+    padding:15px 0;
+}
+
+#boroughFilter {
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+}
+
+/*Hamburger Menu Styling*/
+
+#menu {
+    width: 29;
+    height: 29;
+    padding: 4px 4px 4px 4px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+    background-color: rgb(78, 78, 78);
+    border-radius: 4px;
+    cursor: pointer;
+    line-height: 31px;
+    text-align: center;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#menu:hover {
+    cursor: pointer;
+}
+
+#toggle {
+    display: none;
+  }
+  
+.toggle {
+    margin-top: 2px;
+    margin-left: -1px;    
+}
+
+.toggle > span{
+    display: block;
+    width: 29px;
+    height: 5px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #fff;
+    border-radius: 4px;
+    transform-origin: center;  
+    transition: transform .5s;
+}
+
+input#toggle:checked ~ .toggle > span{
+    transform: translateY(10px) rotate(-45deg);
+}
+
+input#toggle:checked ~ .toggle > span:nth-child(2){
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+input#toggle:checked ~ .toggle > span:nth-child(3){
+    transform: translateY(-10px) rotate(45deg);
+}
+
+.toggle:hover span{
+    background: #baeb82;
+}
+
+.toggle {
+    display: inline-block;
+}
+
+/*Legend Div Styling*/
+
+.legendTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 5px;
+}
+
+#legendDiv {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgb(78, 78, 78);
+    height: auto;
+    width: 250px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: none;
+    /*overflow-x: hidden;
+    overflow-y: hidden;*/
+    overflow: hidden;
+    padding: 5px;
+}
+
+#legendContainer {
+    top: 40px;
+    margin: 5px;
+    padding: 9px;
+    background-color: #fff;
+    border-radius: 4px;
+    color: rgb(78, 78, 78);
+}
+
+.legendItemHolder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.legendItemCC {
+    height: 17px;
+    width: 42px;
+    background-color: transparent;
+    border: 4px solid #000;
+}
+
+.legendItemPUID {
+    height: 21px;
+    width: 46px;
+    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjIsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA4IDgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDggODsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9DQoJLnN0MXtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC41O30NCjwvc3R5bGU+DQo8cmVjdCBjbGFzcz0ic3QwIiB3aWR0aD0iOCIgaGVpZ2h0PSI4Ii8+DQo8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMCwwbDgsOEwwLDB6IE04LDBMMCw4TDgsMHoiLz4NCjwvc3ZnPg0K");
+    background-repeat: repeat;
+    background-size: 8px;
+    border: 2px solid #000;
+}
+
+.legendItemLPC {
+    height: 21px;
+    width: 46px;
+    background-color: rgba(37, 227, 245, 0.5);
+    border: 2px solid rgba(0, 156, 171, 0.7);
+}
+
+.legendItemFed {
+    height: 19px;
+    width: 44px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 3px solid rgba(196, 16, 16, 1);
+}
+
+.legendItemERGIS {
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    background-color: rgba(193, 39, 45, 1);
+    margin-left: 20px;
+    border: 1px solid #ccc;
+}
+
+.legendItemIL {
+    height: 21px;
+    width: 46px;
+    background-color: rgba(240,148,215, 0.2);
+    border: 2px solid rgba(138, 45, 113, 0.5);
+}
+
+.legendItemINT {
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    background-color: rgba(110,135,227, 1);
+    margin-left: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.legendItemHD {
+    height: 21px;
+    width: 46px;
+    background-color: rgba(252,223,104, 0.2);
+    border: 2px solid rgba(99, 88, 41, 0.5);
+}
+
+.legendItemSCE {
+    height: 21px;
+    width: 46px;
+    background-color: rgba(149,185,131, 0.2);
+    border: 2px solid rgba(50, 92, 28, 0.5);
+}
+
+#ccdVis {
+    display: flex;
+}
+
+#puidVis, #lpcVis, #fedVis, #ergisVis, #ilVis, #intVis, #hdVis, #sceVis {
+    display: none;
+}
+
+.legendText {
+    font-size: 12px;
+}
+
+
+/*Button Styling*/
+
+.searchButton {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.searchButton:hover {
+    background-color: #e7e7e7;
+}
+
+.cancelButton {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.cancelButton:hover {
+    background-color: #e7e7e7;
+}
+
+/**Switch Styling**/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 33.75px;
+    height: 19.125px;
+  }
+  
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14.62px;
+    width: 14.62px;
+    left: 2.25px;
+    bottom: 2.25px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #baeb82;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #baeb82;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(14.62px);
+    -ms-transform: translateX(14.62px);
+    transform: translateX(14.62px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/**Search Styling**/
+
+#addSearch {
+    width: 80%;
+}
+
+#searchHolder {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.esri-search {
+    background-color: transparent !important;
+
+}
+
+.esri-menu {
+    bottom: 40px !important;
+    /*left: 310px !important;*/
+    top: unset !important;
+    border: 2px solid #4e4e4e;
+    border-radius: 3px;
+}
+
+.esri-popup__main-container {
+    border-radius: 5px;
+}
