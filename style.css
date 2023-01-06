@@ -17,7 +17,7 @@ body,
     font-weight: 900;
     font-size: 30px;
     color: rgb(36,36,36);
-    text-shadow: 2px 2px #baeb82;
+    text-shadow: 3px 3px #dbdbdb;
 }
 
 /*Menu Div Styling*/
@@ -87,7 +87,7 @@ body,
     width: 100%;
     height: 35px;
     font-size: 12px;
-    border: 0px;
+    border: 1px solid #d0d0d0;
     border-radius: 2px;
 }
 
@@ -159,8 +159,13 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     transform: translateY(-10px) rotate(45deg);
 }
 
+.toggle:hover {
+    cursor: pointer;
+}
+
 .toggle:hover span{
-    background: #baeb82;
+    background: #c75458;
+    cursor: pointer;
 }
 
 .toggle {
@@ -294,42 +299,26 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
 
 /*Button Styling*/
 
-.searchButton {
-    background-color: white;
+.button {
+    background-color: rgb(233, 233, 233);
     color: black;
-    border: 2px solid #e7e7e7;
-    border-radius: 5px;
-    padding: 4px 8px;
+    border: 0px solid #e7e7e7;
+    border-radius: 4px;
+    padding: 5px 9px;
     text-align: center;
+    font-family: 'Poppins', san-serif;
+    font-weight: 400;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
+    font-size: 11px;
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
 
-.searchButton:hover {
-    background-color: #e7e7e7;
-}
-
-.cancelButton {
-    background-color: white;
-    color: black;
-    border: 2px solid #e7e7e7;
-    border-radius: 5px;
-    padding: 4px 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-
-.cancelButton:hover {
-    background-color: #e7e7e7;
+.button:hover {
+    background-color: #c75458;
+    border-color: #e28689;
 }
 
 /**Switch Styling**/
@@ -372,11 +361,11 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
 }
   
 input:checked + .slider {
-    background-color: #baeb82;
+    background-color: #c75458;
 }
   
 input:focus + .slider {
-    box-shadow: 0 0 1px #baeb82;
+    box-shadow: 0 0 1px #c75458;
 }
   
 input:checked + .slider:before {

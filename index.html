@@ -21,10 +21,12 @@
         FeatureSetByName($map,"Ergis Points")
       );
 
+      var filtSites = OrderBy(sites, 'DTCOMPLETE');
+
       var result = "";
 
-      if (Count(sites) > 1){
-        for (var item in sites){
+      if (Count(filtSites) > 1){
+        for (var item in filtSites){
             var id = item["PUID"];
             var siteNme = item["SITENAME"];
             var lpcFinding = item["LPCIMPACT"];
@@ -43,8 +45,8 @@
             `;
           }
           return result;
-      } else if (Count(sites) == 1) {
-        for (var item in sites){
+      } else if (Count(filtSites) == 1) {
+        for (var item in filtSites){
           var id = item["PUID"];
           var siteNme = item["SITENAME"];
           var lpcFinding = item["LPCIMPACT"];
@@ -137,33 +139,33 @@
         <span class="labelText">Filter Tax Lots by Council District</span>
         <select id="ccdFilter" multiple class="selectize" placeholder="Select a Council District..."></select>
         <div class="buttonHolder">
-          <button class="searchButton" id="doBtnCcd">Search</button>
-          <button class="cancelButton" id="cancelBtnCcd">Clear</button>
+          <button class="button" id="doBtnCcd">Search</button>
+          <button class="button" id="cancelBtnCcd">Reset</button>
         </div>
       </div>
       <div class="lineDiv"><span class="labelNum">2.</span><div class="line"></div></div>
       <div class="filterDiv">
         <span class="labelText">Search by ERGIS PUID</span>
-        <input type="text" id="puidSelect" name="puidSelect" placeholder="Enter a PUID ">
+        <input type="text" autocomplete="off" id="puidSelect" name="puidSelect" placeholder="Enter a PUID ">
         <div class="buttonHolder">
-          <button class="searchButton" id="doBtnOne">Search</button>
-          <button class="cancelButton" id="cancelBtnOne">Clear</button>
+          <button class="button" id="doBtnOne">Search</button>
+          <button class="button" id="cancelBtnOne">Clear</button>
         </div> 
       </div>
       <div class="filterDiv">
         <span class="labelText">Search by LPC Findings</span>
         <select id="lpcFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
         <div class="buttonHolder">
-          <button class="searchButton" id="doBtnTwo">Search</button>
-          <button class="cancelButton" id="cancelBtnTwo">Clear</button>
+          <button class="button" id="doBtnTwo">Search</button>
+          <button class="button" id="cancelBtnTwo">Clear</button>
         </div>
       </div>
       <div class="filterDiv">
         <span class="labelText">Search by Fed Findings</span>
         <select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
         <div class="buttonHolder">
-          <button class="searchButton" id="doBtnThree">Search</button>
-          <button class="cancelButton" id="cancelBtnThree">Clear</button>
+          <button class="button" id="doBtnThree">Search</button>
+          <button class="button" id="cancelBtnThree">Clear</button>
         </div>
       </div>
       <div class="lineDiv"><span class="labelNum">3.</span><div class="line"></div></div>
@@ -192,7 +194,7 @@
       <span class="labelSubText" id="searchText">Find an Address</span>
       <div class="layerDiv">
         <div id="searchHolder">
-          <button class="searchButton" id="toggleSearch">Toggle</button>
+          <button class="button" id="toggleSearch">Toggle</button>
           <div id="addSearch"></div>
         </div>
       </div>

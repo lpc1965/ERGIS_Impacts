@@ -478,7 +478,7 @@ require([
     function getValues(response) {
       var features = response.features;
       var values = features.map(function(feature) {
-        return feature.attributes.LPCIMPACT;
+        return feature.attributes.LPCIMPTWO;
       });
       return values;
     }
@@ -494,7 +494,8 @@ require([
         }
       });
       
-      let removeValues = ['ADJACENT DESIGNATED LANDMARK', 'ADJACENT HISTORIC DISTRICT', 'ADJACENT POTENTIAL HISTORIC DIST.','BLDG. NEAR ELIGIBLE HISTORICT DIST.','BLDG. W/IN DESIGNATED HISTORIC DIST','BUILDING NEAR HISTORIC DISTRICT','CALENDARED AND HEARD BY LPC','CALENDARED BY LPC','NO INTEREST','PROJECT CONTAINS SIGNIFICANT BLDGS.','PROJECT NEAR SIGNIFICANT BLDGS.','SIGNIFICANCE NOT DETERMINED','SIGNIFICANT BUT NOT ELIGIBLE'];
+      //let removeValues = ['ADJACENT DESIGNATED LANDMARK', 'ADJACENT HISTORIC DISTRICT', 'ADJACENT POTENTIAL HISTORIC DIST.','BLDG. NEAR ELIGIBLE HISTORICT DIST.','BLDG. W/IN DESIGNATED HISTORIC DIST','BUILDING NEAR HISTORIC DISTRICT','CALENDARED AND HEARD BY LPC','CALENDARED BY LPC','NO INTEREST','PROJECT CONTAINS SIGNIFICANT BLDGS.','PROJECT NEAR SIGNIFICANT BLDGS.','SIGNIFICANCE NOT DETERMINED','SIGNIFICANT BUT NOT ELIGIBLE'];
+      let removeValues = ['NA'];
       let uniqueValues = tempUniqueValues.filter(item => !removeValues.includes(item));
 
       return uniqueValues;
@@ -527,7 +528,7 @@ require([
     function getValuesTwo(response) {
       var features = response.features;
       var values = features.map(function(feature) {
-        return feature.attributes.FEDIMPACT;
+        return feature.attributes.FEDIMPTWO;
       });
       return values;
     }
@@ -543,7 +544,8 @@ require([
         }
       });
 
-      let removeValues = ['ADJACENT DESIGNATED NR LANDMARK','ADJACENT NR HISTORIC DISRTICT','ADJACENT POTENTIAL NR HIST. DIST','ADJACENT POTENTIAL NR LANDMARK','ADJACENT PROPERTY W/IN NR HD','BUILDING NEAR HISTORIC DISTRICT','NO INTEREST','PROJECT NEAR SIGNIFICANT BLDGS.','SIGNIFICANCE NOT DETERMINED','SIGNIFICANT BUT UNELIGIBLE'];
+      //let removeValues = ['ADJACENT DESIGNATED NR LANDMARK','ADJACENT NR HISTORIC DISRTICT','ADJACENT POTENTIAL NR HIST. DIST','ADJACENT POTENTIAL NR LANDMARK','ADJACENT PROPERTY W/IN NR HD','BUILDING NEAR HISTORIC DISTRICT','NO INTEREST','PROJECT NEAR SIGNIFICANT BLDGS.','SIGNIFICANCE NOT DETERMINED','SIGNIFICANT BUT UNELIGIBLE'];
+      let removeValues = ['NA'];
       let uniqueValues = tempUniqueValues.filter(item => !removeValues.includes(item));
 
       return uniqueValues;
@@ -633,7 +635,7 @@ require([
     })
     resultsLayerPUID.addMany(lotResults);
     document.getElementById("puidVis").style.display="flex" 
-    //view.goTo(resultsLayer.graphics); 
+    view.goTo(resultsLayerPUID.graphics); 
     }
 
     /******
@@ -664,7 +666,7 @@ require([
 
     function doQueryTwo() {
       resultsLayerLPC.removeAll();
-      paramsTwo.where = "COUNDIST IN (" + ccdVar + ") AND LPCIMPACT IN (" + lpcImpactValue + ")";
+      paramsTwo.where = "COUNDIST IN (" + ccdVar + ") AND LPCIMPTWO IN (" + lpcImpactValue + ")";
       console.log(paramsTwo.where);
       query.executeQueryJSON(ergisUrl, paramsTwo).then(getResultsTwo).catch(promiseRejected);
     }
@@ -738,7 +740,7 @@ require([
 
     function doQueryThree() {
       resultsLayerFED.removeAll();
-      paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPACT IN (" + fedImpactValue + ")";
+      paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN (" + fedImpactValue + ")";
       console.log(fedImpactValue);
       query.executeQueryJSON(ergisUrl, paramsThree).then(getResultsThree).catch(promiseRejected);
     }
