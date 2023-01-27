@@ -38,9 +38,15 @@ body,
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.section {
+    background-color: rgb(241, 241, 241);
+    border-radius: 5px;
+    padding: 10px;
+}
+
 .filterDiv {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .lineDiv {
@@ -58,11 +64,12 @@ body,
 .line {
     display: flex;
     flex-grow: 1;
-    height: 1px;
-    margin-left: 10px;
+    height: 2px;
+    margin-left: 5px;
     margin-bottom: 8px;
-    background-color: #fff;
-  }
+    background-color: #4e4e4e;
+    border-radius: 10px;
+}
 
 .layerDiv {
     display: flex;
@@ -74,21 +81,24 @@ body,
 }
 
 .labelText {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 600;
+    color: #4e4e4e;
 }
 
 .labelSubText {
     font-size: 14px;
     font-weight: 400;
+    color: #4e4e4e;
 }
 
 #puidSelect {
     width: 100%;
     height: 35px;
-    font-size: 12px;
+    /*font-size: 12px;*/
     border: 1px solid #d0d0d0;
     border-radius: 2px;
+    padding-left: 6px;
 }
 
 #lpcFilter {
@@ -100,6 +110,39 @@ body,
     width: 100%;
     height: 40px;
     border-radius: 3px;
+}
+
+/*Selectize Styling*/
+
+.selectize-input {
+    z-index: 0 !important;
+}
+
+/*Project Dropdown Styling*/
+
+#projFilterHolder {
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.projDropDown {
+    width: 100%;
+    margin-top: 3px;
+    height: 25px;
+    font-family: 'Poppins', san-serif;
+    font-size: 12px;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+}
+
+#projFilterHolder {
+    display: none;
+}
+
+.projFiltText {
+    font-size: 12px;
+    font-weight: 400;
+    color: #4e4e4e;
 }
 
 /*Hamburger Menu Styling*/
@@ -140,7 +183,7 @@ body,
     height: 5px;
     margin-bottom: 5px;
     position: relative;
-    background: #fff;
+    background: #d6d6d6;
     border-radius: 4px;
     transform-origin: center;  
     transition: transform .5s;
@@ -284,11 +327,25 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     border: 2px solid rgba(50, 92, 28, 0.5);
 }
 
+.legendItemProj {
+    height: 21px;
+    width: 46px;
+    background-color: rgba(66, 206, 245, 0.1);
+    border: 2px solid rgba(23, 119, 145, 1);
+}
+
+.legendItemProjBuff {
+    height: 21px;
+    width: 46px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 2px dashed rgba(0, 0, 0, 0.8);
+}
+
 #ccdVis {
     display: flex;
 }
 
-#puidVis, #lpcVis, #fedVis, #ergisVis, #ilVis, #intVis, #hdVis, #sceVis {
+#puidVis, #lpcVis, #fedVis, #ergisVis, #ilVis, #intVis, #hdVis, #sceVis, #projVis, #projBuffVis {
     display: none;
 }
 
@@ -296,11 +353,10 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     font-size: 12px;
 }
 
-
 /*Button Styling*/
 
 .button {
-    background-color: rgb(233, 233, 233);
+    background-color: #d6d6d6;
     color: black;
     border: 0px solid #e7e7e7;
     border-radius: 4px;
@@ -311,7 +367,7 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     text-decoration: none;
     display: inline-block;
     font-size: 11px;
-    margin: 4px 2px;
+    margin: 4px 0px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
@@ -343,7 +399,7 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #d6d6d6;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -396,8 +452,18 @@ input:checked + .slider:before {
 
 .esri-search {
     background-color: transparent !important;
-
 }
+
+.esri-search__input {
+    background-color: white;
+    border-radius: 4px;
+    color: #7e7e7e;
+    border: 1px solid #d0d0d0;
+}
+
+.esri-input.esri-search__input::placeholder{
+    color:#7e7e7e;
+}‍‍‍
 
 .esri-menu {
     bottom: 40px !important;
@@ -405,8 +471,23 @@ input:checked + .slider:before {
     top: unset !important;
     border: 2px solid #4e4e4e;
     border-radius: 3px;
+    z-index: 3 !important;
 }
 
 .esri-popup__main-container {
-    border-radius: 5px;
+    border-radius: 4px;
+}
+
+.esri-widget--button {
+    background-color: #d6d6d6;
+    border-radius: 4px;
+    color: #333333;
+}
+
+.esri-widget--button:hover {
+    color: #4e4e4e;
+}
+
+.esri-widget--button:hover {
+    background-color: #c75458;
 }

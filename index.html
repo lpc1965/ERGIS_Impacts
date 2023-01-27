@@ -122,6 +122,14 @@
             <div class="legendItemSCE"></div>
             <span class="legendText">Scenic Landmark</span>
           </div>
+          <div id="projVis" class="legendItemHolder">
+            <div class="legendItemProj"></div>
+            <span class="legendText">Major Projects / Study Areas</span>
+          </div>
+          <div id="projBuffVis" class="legendItemHolder">
+            <div class="legendItemProjBuff"></div>
+            <span class="legendText">Study Area 400' Buffer</span>
+          </div>
           <div id="ccdVis" class="legendItemHolder">
             <div class="legendItemCC"></div>
             <span class="legendText">City Council Districts</span>
@@ -134,68 +142,99 @@
     <div id="titleDiv">ERGIS Data Explorer</div>
 
     <div id="optionsDiv">
-      <div class="lineDiv"><span class="labelNum">1. Select Council District(s)</span><div class="line"></div></div>
-      <div class="filterDiv">
-        <span class="labelSubText">Filter Tax Lots by Council District</span>
-        <select id="ccdFilter" multiple class="selectize" placeholder="Select a Council District..."></select>
-        <div class="buttonHolder">
-          <button class="button" id="doBtnCcd">Search</button>
-          <button class="button" id="cancelBtnCcd">Reset</button>
+      <div class="lineDiv"><span class="labelNum">Search by Address or BBL</span></div>
+      <div class="section">
+        <span class="labelSubText" id="searchText">Find an Address</span>
+        <div class="layerDiv">
+          <div id="searchHolder">
+            <button class="button" id="toggleSearch">Toggle</button>
+            <div id="addSearch"></div>
+          </div>
         </div>
       </div>
-      <div class="lineDiv"><span class="labelNum">2. Search by PUID or Findings</span><div class="line"></div></div>
-      <div class="filterDiv">
-        <span class="labelSubText">Search by ERGIS PUID</span>
-        <input type="text" autocomplete="off" id="puidSelect" name="puidSelect" placeholder="Enter a PUID ">
-        <div class="buttonHolder">
-          <button class="button" id="doBtnOne">Search</button>
-          <button class="button" id="cancelBtnOne">Clear</button>
-        </div> 
-      </div>
-      <div class="filterDiv">
-        <span class="labelSubText">Search by LPC Findings</span>
-        <select id="lpcFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
-        <div class="buttonHolder">
-          <button class="button" id="doBtnTwo">Search</button>
-          <button class="button" id="cancelBtnTwo">Clear</button>
+      <div class="lineDiv"><span class="labelNum">Search by PUID or Finding</span></div>
+      <div class="section">
+        <div class="filterDiv">
+          <div class="lineDiv"><span class="labelText">1. Select a Council District</span><div class="line"></div></div>
+          <span class="labelSubText">Filter Tax Lots by Council District</span>
+          <select id="ccdFilter" multiple class="selectize" placeholder="Select a Council District..."></select>
+          <div class="buttonHolder">
+            <button class="button" id="doBtnCcd">Search</button>
+            <button class="button" id="cancelBtnCcd">Reset</button>
+          </div>
+        </div>
+        <div class="lineDiv"><span class="labelText">2. Select a PUID or Findings</span><div class="line"></div></div>
+        <div class="filterDiv">
+          <span class="labelSubText">Select an ERGIS PUID</span>
+          <input type="text" autocomplete="off" id="puidSelect" name="puidSelect" placeholder="Enter a PUID ">
+          <div class="buttonHolder">
+            <button class="button" id="doBtnOne">Search</button>
+            <button class="button" id="cancelBtnOne">Clear</button>
+          </div> 
+        </div>
+        <div class="filterDiv">
+          <span class="labelSubText">Select LPC Findings</span>
+          <select id="lpcFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
+          <div class="buttonHolder">
+            <button class="button" id="doBtnTwo">Search</button>
+            <button class="button" id="cancelBtnTwo">Clear</button>
+          </div>
+        </div>
+        <div class="filterDiv">
+          <span class="labelSubText">Select Fed Findings</span>
+          <select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
+          <div class="buttonHolder">
+            <button class="button" id="doBtnThree">Search</button>
+            <button class="button" id="cancelBtnThree">Clear</button>
+          </div>
         </div>
       </div>
-      <div class="filterDiv">
-        <span class="labelSubText">Search by Fed Findings</span>
-        <select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
-        <div class="buttonHolder">
-          <button class="button" id="doBtnThree">Search</button>
-          <button class="button" id="cancelBtnThree">Clear</button>
+      <div class="lineDiv"><span class="labelNum">Context Data</span></div>
+      <div class="section">
+        <div class="layerDiv">
+          <span class="labelSubText">ERGIS Project Points</span>
+          <label class="switch">
+              <input type="checkbox" id="layerButton">
+              <span class="slider round"></span>
+          </label>
         </div>
-      </div>
-      <div class="lineDiv"><span class="labelNum">3. Toggle Context Data</span><div class="line"></div></div>
-      <div class="layerDiv">
-        <span class="labelSubText">ERGIS Project Points</span>
-        <label class="switch">
-            <input type="checkbox" id="layerButton">
+        <div class="layerDiv">
+          <span class="labelSubText">DCP Major Projects / Study Areas</span>
+          <label class="switch">
+              <input type="checkbox" id="projlayerButton">
+              <span class="slider round"></span>
+          </label>
+        </div>
+        <div id="projFilterHolder">
+          <span class="projFiltText">Filter Major Projects</span>
+          <select id="projFilter" required="required" class="projDropDown">
+            <option value="" selected>All Study Areas</option>
+            <option value="Atlantic Yards Arena and Redevelopment Project Study Area">Atlantic Yards</option>
+            <option value="Downtown Far Rockaway Redevelopment Project Study Area">Downtown Far Rockaway</option>
+            <option value="East Harlem Rezoning Study Area">East Harlem</option>
+            <option value="East New York Rezoning Study Area">East New York</option>
+            <option value="East Village/Lower East Side Rezoning Study Area">East Village/Lower East Side</option>
+            <option value="Empire Station Complex Study Area">Empire Station Complex</option>
+            <option value="Garment Center Study Area">Garment Center</option>
+            <option value="Gowanus Neighborhood Rezoning Study Area">Gowanus Neighborhood</option>
+            <option value="Greater East Midtown Study Area">Greater East Midtown</option>
+            <option value="Hudson Yards Rezoning Study Area">Hudson Yards Rezoning</option>
+            <option value="Union Square South Hotel Special Permit Study Area">Union Square South</option>
+          </select>
+        </div>
+        <div class="layerDiv">
+          <span class="labelSubText">LPC Designations</span>
+          <label class="switch">
+            <input type="checkbox" id="lpcLayerButton">
             <span class="slider round"></span>
-        </label>
-      </div>
-      <div class="layerDiv">
-        <span class="labelSubText">LPC Designations</span>
-        <label class="switch">
-          <input type="checkbox" id="lpcLayerButton">
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class="layerDiv">
-        <span class="labelSubText">City Council Districts</span>
-        <label class="switch">
-          <input type="checkbox" id="ccdLayerButton" checked>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class="lineDiv"><span class="labelNum">4. Find Address or BBL</span><div class="line"></div></div>
-      <span class="labelSubText" id="searchText">Find an Address</span>
-      <div class="layerDiv">
-        <div id="searchHolder">
-          <button class="button" id="toggleSearch">Toggle</button>
-          <div id="addSearch"></div>
+          </label>
+        </div>
+        <div class="layerDiv">
+          <span class="labelSubText">City Council Districts</span>
+          <label class="switch">
+            <input type="checkbox" id="ccdLayerButton" checked>
+            <span class="slider round"></span>
+          </label>
         </div>
       </div>
     </div>

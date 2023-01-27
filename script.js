@@ -338,6 +338,69 @@ require([
         labelsVisible: true
     });
 
+    /*******Add LPC Scenic Landmarks*******/  
+
+    const dcpLabel = {    
+      symbol: {
+        type: "text", 
+        color: "black",
+        haloColor: "white",
+        haloSize: 1,  
+        font: { 
+          family: "Poppins",
+          size: 10,
+        }
+      },
+      maxScale: 0,
+      minScale: 30000,    
+      labelPlacement: "above-center",
+      labelExpressionInfo: {
+        expression: "$feature.PROJECT_NA + TextFormatting.NewLine + 'PUID: ' + $feature.PUID"
+      }
+    };
+
+    const dcpStudyAreas = new FeatureLayer({
+      title: "DCP Study Areas",
+      url: "https://services5.arcgis.com/Oos4pNA2538iVFA1/arcgis/rest/services/DCP_Study_Areas/FeatureServer",
+      maxScale: 0,
+      minScale: 0,
+      visible: false,
+      labelingInfo: [dcpLabel],
+      labelsVisible: true,
+      renderer: {
+        type: "simple", 
+        symbol: {
+          type: "simple-fill",
+          color: [66, 206, 245, 0.1],
+          outline: {
+            color: "#177791",
+            width: 1,
+            style: "solid"    
+          }
+        }
+      }
+    });
+
+    const dcpStudyAreasBuff = new FeatureLayer({
+      title: "DCP Study Areas",
+      url: "https://services5.arcgis.com/Oos4pNA2538iVFA1/arcgis/rest/services/DCP_Study_Areas_Buffers/FeatureServer",
+      maxScale: 0,
+      minScale: 0,
+      visible: false,
+      renderer: {
+        type: "simple", 
+        symbol: {
+          type: "simple-fill",
+          color: [202, 208, 219, 0],
+          outline: {
+            color: "#000",
+            width: 1.5,
+            style: "dash"    
+          }
+        }
+      }
+    });
+
     /******Variable used to narrow down ERGIS points during impact finding queries******/
 
     let ccdVar = [01];
@@ -370,7 +433,7 @@ require([
       container: "viewDiv",
       map: new Map({
         //basemap: "topo-vector",
-        layers: [tileBaseMap, lpcSce, lpcHd, lpcInd, lpcInt, taxLots, ccdBoundaries, resultsLayerLPC, resultsLayerPUID, resultsLayerFED, ergis],
+        layers: [tileBaseMap, dcpStudyAreas, lpcSce, lpcHd, lpcInd, lpcInt, taxLots, ccdBoundaries, resultsLayerLPC, resultsLayerPUID, resultsLayerFED, ergis, dcpStudyAreasBuff],
         /*basemap: {
             portalItem: {
               id: "75a08e8cd8b64dcfa6945bb7f624ccc5"
@@ -635,7 +698,7 @@ require([
     })
     resultsLayerPUID.addMany(lotResults);
     document.getElementById("puidVis").style.display="flex" 
-    view.goTo(resultsLayerPUID.graphics); 
+    //view.goTo(resultsLayerPUID.graphics); 
     }
 
     /******
@@ -865,24 +928,21 @@ require([
         document.getElementById("fedVis").style.display="none"
     });
 
-    /*********Borough Filter*********/
+    /*********Major Project Filter*********/
 
-    /*const boroFilt = document.getElementById("boroughFilter");
+    const projFilt = document.getElementById("projFilter");
 
-    boroFilt.addEventListener("change", function(event) {
+    projFilt.addEventListener("change", function(event) {
         const newValue = event.target.value;
         const whereClause = newValue
-            ? "Borough = '" + newValue + "'"
+            ? "PROJECT_NA = '" + newValue + "'"
             : null;
-        taxLots.definitionExpression = whereClause;
-        boroughVar = event.target.value;
-        resultsLayerPUID.removeAll();
-        resultsLayerLPC.removeAll();
-        resultsLayerFED.removeAll();
-        document.getElementById('puidSelect').value = ''
-        lpcSelect.clear(true);
-        fedSelect.clear(true);
-    });*/
+            dcpStudyAreas.definitionExpression = whereClause;
+            dcpStudyAreasBuff.definitionExpression = whereClause;
+      
+    });
+
+    /*********CCD Filter*********/
 
     let ccdValue;
 
@@ -989,10 +1049,10 @@ require([
 
     /*********LPC Designations Layer ON/OFF Swtich*********/
 
-    var ccdLabelButton = document.getElementById("ccdLayerButton");
+    var ccdLayerButton = document.getElementById("ccdLayerButton");
 
     let ccdLayerFlag = 1;
-    ccdLabelButton.addEventListener("click", function() {
+    ccdLayerButton.addEventListener("click", function() {
         if (ccdLayerFlag == 0) {
             ccdBoundaries.visible = true;
             ccdLayerFlag = 1;
@@ -1001,6 +1061,30 @@ require([
             ccdBoundaries.visible = false;
             ccdLayerFlag = 0;
             document.getElementById("ccdVis").style.display="none"
+        }
+    });
+
+
+    /*********Major Projects Layer ON/OFF Swtich*********/
+
+    var projLayerButton = document.getElementById("projlayerButton");
+
+    let projLayerFlag = 1;
+    projLayerButton.addEventListener("click", function() {
+        if (projLayerFlag == 1) {
+            dcpStudyAreas.visible = true;
+            dcpStudyAreasBuff.visible = true;
+            projLayerFlag = 0;
+            document.getElementById("projVis").style.display="flex"
+            document.getElementById("projBuffVis").style.display="flex"
+            document.getElementById("projFilterHolder").style.display="block"
+        } else {
+            dcpStudyAreas.visible = false;
+            dcpStudyAreasBuff.visible = false;
+            projLayerFlag = 1;
+            document.getElementById("projVis").style.display="none"
+            document.getElementById("projBuffVis").style.display="none"
+            document.getElementById("projFilterHolder").style.display="none"
         }
     });
 
