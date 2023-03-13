@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/dark/main.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/css/selectize.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" />
     <link rel="stylesheet" href="style.css" />
 
@@ -21,7 +22,7 @@
         FeatureSetByName($map,"Ergis Points")
       );
 
-      var filtSites = OrderBy(sites, 'DTCOMPLETE');
+      var filtSites = OrderBy(sites, 'DTOPENED DESC');
 
       var result = "";
 
@@ -29,12 +30,14 @@
         for (var item in filtSites){
             var id = item["PUID"];
             var siteNme = item["SITENAME"];
+            var projName = item["PROJECTNAM"]
             var lpcFinding = item["LPCIMPACT"];
             var fedFinding = item["FEDIMPACT"];
             var address = item["ADDRESS"];
-            var dtcomplete = item["DTCOMPLETE"];
-            var formatDate = Text(dtcomplete, 'MM-DD-YYYY');
+            var dtopened = item["DTOPENED"];
+            var formatDate = Text(dtopened, 'MM-DD-YYYY');
             result += `PUID #: ${id}
+                    Project Name: ${projName}
                     Site Name: ${siteNme}
                     Address: ${address}
                     LPC Finding: ${lpcFinding}
@@ -49,12 +52,14 @@
         for (var item in filtSites){
           var id = item["PUID"];
           var siteNme = item["SITENAME"];
+          var projName = item["PROJECTNAM"]
           var lpcFinding = item["LPCIMPACT"];
           var fedFinding = item["FEDIMPACT"];
           var address = item["ADDRESS"];
-          var dtcomplete = item["DTCOMPLETE"];
-          var formatDate = Text(dtcomplete, 'MM-DD-YYYY');
+          var dtopened = item["DTOPENED"];
+          var formatDate = Text(dtopened, 'MM-DD-YYYY');
           result += `PUID #: ${id}
+                  Project Name: ${projName}
                   Site Name: ${siteNme}
                   Address: ${address}
                   LPC Finding: ${lpcFinding}
@@ -100,11 +105,15 @@
           </div>
           <div id="lpcVis" class="legendItemHolder">
             <div class="legendItemLPC"></div>
-            <span class="legendText">LPC Finding Tax Lots</span>
+            <span class="legendText">LPC 'Eligible' Tax Lots</span>
           </div>
-          <div id="fedVis" class="legendItemHolder">
-            <div class="legendItemFed"></div>
-            <span class="legendText">Federal Finding Tax Lots</span>
+          <div id="fedVisElig" class="legendItemHolder">
+            <div class="legendItemFedElig"></div>
+            <span class="legendText">S/NR 'Eligible' Tax Lots</span>
+          </div>
+          <div id="fedVisList" class="legendItemHolder">
+            <div class="legendItemFedList"></div>
+            <span class="legendText">S/NR 'Listed' Tax Lots</span>
           </div>
           <div id="ilVis" class="legendItemHolder">
             <div class="legendItemIL"></div>
@@ -113,6 +122,10 @@
           <div id="intVis" class="legendItemHolder">
             <div class="legendItemINT"></div>
             <span class="legendText">Interior Landmark</span>
+          </div>
+          <div id="nrhpVis" class="legendItemHolder">
+            <div class="legendItemNRHP"></div>
+            <span class="legendText">National Register Listings</span>
           </div>
           <div id="hdVis" class="legendItemHolder">
             <div class="legendItemHD"></div>
@@ -124,7 +137,7 @@
           </div>
           <div id="projVis" class="legendItemHolder">
             <div class="legendItemProj"></div>
-            <span class="legendText">Major Projects / Study Areas</span>
+            <span class="legendText">DCP Study Areas</span>
           </div>
           <div id="projBuffVis" class="legendItemHolder">
             <div class="legendItemProjBuff"></div>
@@ -138,55 +151,126 @@
         </div>
       </div>
     </div>
-        
-    <div id="titleDiv">ERGIS Data Explorer</div>
+    
+    <div class="titleDiv">
+      <div class="titleText">ERGIS Data Explorer</div>
+      <div id="infoButton" class="infoButton">
+        <i class="far fa-question-circle"></i>
+      </div>
+    </div>
+
+    <div id="infoDiv">
+          <div class="infoTitle">About the Map</div>
+          <a class="closeInfo">
+            <i id="closeInfo" class="fa-solid fa-xmark"></i>
+          </a>
+          <div class="columns">
+            <div class="columnText">
+              <span class="labelSubText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+            </div>
+            <div class="columnText">
+              <span class="labelSubText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+            </div>
+          </div>
+    </div>
 
     <div id="optionsDiv">
       <div class="lineDiv"><span class="labelNum">Search by Address or BBL</span></div>
       <div class="section">
         <span class="labelSubText" id="searchText">Find an Address</span>
-        <div class="layerDiv">
           <div id="searchHolder">
             <button class="button" id="toggleSearch">Toggle</button>
             <div id="addSearch"></div>
           </div>
-        </div>
       </div>
       <div class="lineDiv"><span class="labelNum">Search by PUID or Finding</span></div>
       <div class="section">
         <div class="filterDiv">
-          <div class="lineDiv"><span class="labelText">1. Select a Council District</span><div class="line"></div></div>
+          <div class="lineDiv"><span class="labelText">1. Select City Council Districts</span><!--<div class="line"></div>--></div>
           <span class="labelSubText">Filter Tax Lots by Council District</span>
           <select id="ccdFilter" multiple class="selectize" placeholder="Select a Council District..."></select>
           <div class="buttonHolder">
             <button class="button" id="doBtnCcd">Search</button>
             <button class="button" id="cancelBtnCcd">Reset</button>
           </div>
+          <div id="warningDiv">
+            <table class="warningTable">
+              <tbody>
+                <tr>
+                  <td><span id="warning">Warning: including more than three Council District may effect accuracy of PUID or Findings results.</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="lineDiv"><span class="labelText">2. Select a PUID or Findings</span><div class="line"></div></div>
+        <div class="lineDiv"><span class="labelText">2. Find a PUID or Toggle Findings in:</span><!--<div class="line"></div>--></div>
+        <div>
+          <table class="ccdTable">
+            <tbody>
+              <tr>
+                <td><span id="ccdNum">Council District 01</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="filterDiv">
-          <span class="labelSubText">Select an ERGIS PUID</span>
+          <span id="puidLabel" class="labelSubText">Find Tax Lots by ERGIS PUID</span>
           <input type="text" autocomplete="off" id="puidSelect" name="puidSelect" placeholder="Enter a PUID ">
           <div class="buttonHolder">
             <button class="button" id="doBtnOne">Search</button>
             <button class="button" id="cancelBtnOne">Clear</button>
           </div> 
         </div>
-        <div class="filterDiv">
-          <span class="labelSubText">Select LPC Findings</span>
-          <select id="lpcFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
+        <div class="switchDiv">
+          <span class="labelSubText">Toggle LPC 'Eligible' Findings</span>
+          <div class="switchSubDiv">
+            <div>
+              <img id='loadingLpc' src="https://i.stack.imgur.com/kOnzy.gif"/>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="lpcCheckButton">
+              <span class="slider round"></span>
+            </label>
+          </div> 
+          <!--<select id="lpcFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
           <div class="buttonHolder">
             <button class="button" id="doBtnTwo">Search</button>
             <button class="button" id="cancelBtnTwo">Clear</button>
-          </div>
+          </div>-->
         </div>
-        <div class="filterDiv">
-          <span class="labelSubText">Select Fed Findings</span>
-          <select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
+        <div class="switchDiv">
+          <span class="labelSubText">Toggle S/NR 'Eligible' Findings</span>
+          <div class="switchSubDiv">
+            <div>
+              <img id='loadingFedElig' src="https://i.stack.imgur.com/kOnzy.gif"/>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="fedCheckEligButton">
+              <span class="slider round"></span>
+            </label>
+          </div>       
+          <!--<select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
           <div class="buttonHolder">
             <button class="button" id="doBtnThree">Search</button>
             <button class="button" id="cancelBtnThree">Clear</button>
-          </div>
+          </div>-->
+        </div>
+        <div class="switchDiv">
+          <span class="labelSubText">Toggle S/NR 'Listed' Findings</span>
+          <div class="switchSubDiv">
+            <div>
+              <img id='loadingFedList' src="https://i.stack.imgur.com/kOnzy.gif"/>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="fedCheckListButton">
+              <span class="slider round"></span>
+            </label>
+          </div>       
+          <!--<select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
+          <div class="buttonHolder">
+            <button class="button" id="doBtnThree">Search</button>
+            <button class="button" id="cancelBtnThree">Clear</button>
+          </div>-->
         </div>
       </div>
       <div class="lineDiv"><span class="labelNum">Context Data</span></div>
@@ -199,7 +283,7 @@
           </label>
         </div>
         <div class="layerDiv">
-          <span class="labelSubText">DCP Major Projects / Study Areas</span>
+          <span class="labelSubText">DCP Study Areas</span>
           <label class="switch">
               <input type="checkbox" id="projlayerButton">
               <span class="slider round"></span>
@@ -230,6 +314,13 @@
           </label>
         </div>
         <div class="layerDiv">
+          <span class="labelSubText">National Register Listings</span>
+          <label class="switch">
+            <input type="checkbox" id="nrhpLayerButton">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="layerDiv">
           <span class="labelSubText">City Council Districts</span>
           <label class="switch">
             <input type="checkbox" id="ccdLayerButton" checked>
@@ -241,6 +332,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/js/standalone/selectize.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>-->
     <script src="https://js.arcgis.com/4.24/"></script>
     <script src="script.js"></script>
 

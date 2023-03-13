@@ -10,14 +10,111 @@ body,
 
 /*Title Div Styling*/
 
-#titleDiv {
+.titleDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 350px;
+    height: 30px;
     position: absolute;
-    top: 0px;
+    top: 10px;
     left: 20px;
+}
+
+.titleText {
     font-weight: 900;
     font-size: 30px;
     color: rgb(36,36,36);
     text-shadow: 3px 3px #dbdbdb;
+}
+
+.infoButton {
+  padding: 4px;
+  border-radius: 50%;
+  background-color: rgb(78, 78, 78);;
+  text-align: center;
+  text-decoration: none;
+  border: 0px;
+  cursor: pointer;
+}
+
+.fa-question-circle {
+    color: #f1f1f1;
+    font-size: 20px;
+}
+
+.infoButton:hover {
+    background-color: #c75458;
+}
+
+.infoButton-clicked {
+    background-color: #c75458;
+}
+
+/*Info Div Styling*/
+
+#infoDiv {
+    width: 75%;
+    /* min-height: 520px; */
+    max-width: 500px;
+    height: 70%;
+    max-height: 600px;
+    background-color: rgba(78, 78, 78);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: none;
+    z-index: 5;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.infoTitle {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+.closeInfo {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 6;
+    color: #404040 !important;
+}
+
+.fa-xmark {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.fa-xmark:hover {
+    color: #c75458;
+}
+
+.columns {
+    display: flex;
+    margin-top: 25px;
+    height: 96%;
+    background-color: rgb(241, 241, 241);
+    border-radius: 3px;
+    overflow-y: auto;
+}
+
+.columns div {
+    flex: 1;
+}
+
+.columnText {
+    padding: 10px;
 }
 
 /*Menu Div Styling*/
@@ -28,25 +125,40 @@ body,
     left: 20px;
     background-color: rgb(78, 78, 78);
     color: white;
-    padding: 20px;
+    padding: 10px 20px 20px 20px;
     /*min-height: 600px;*/
     max-height: calc(100% - 100px);
     overflow-y: auto;
     height: auto;
-    width: 350px;
-    border-radius: 5px;
+    width: 325px;
+    border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .section {
     background-color: rgb(241, 241, 241);
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 10px;
 }
 
 .filterDiv {
     padding-top: 0px;
     padding-bottom: 0px;
+}
+
+.switchDiv {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.switchSubDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px;
 }
 
 .lineDiv {
@@ -57,7 +169,7 @@ body,
 }
 
 .labelNum{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 }
 
@@ -87,17 +199,17 @@ body,
 }
 
 .labelSubText {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     color: #4e4e4e;
 }
 
 #puidSelect {
     width: 100%;
-    height: 35px;
+    height: 30px;
     /*font-size: 12px;*/
     border: 1px solid #d0d0d0;
-    border-radius: 2px;
+    border-radius: 3px;
     padding-left: 6px;
 }
 
@@ -112,10 +224,53 @@ body,
     border-radius: 3px;
 }
 
+/*Warning Table Styling*/
+
+#warningDiv {
+    display: none;
+}
+
+.warningTable {
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.warningTable tr {
+    background-image: repeating-linear-gradient( 45deg, #ccc, #ccc 10px, #aaa 10px, #aaa 20px );
+    background-repeat: repeat;
+    /*display:table-caption;*/
+}
+
+/*CCD Table Styling*/
+
+.ccdTable {
+    width: 100%;
+    text-align: center;
+    /*border: 2px solid #c75458;
+    background-color: rgba(199, 84, 88, 0.02);*/
+    border-radius: 3px;
+    color: #c75458;
+    font-weight: 800;
+    font-size: 17px;
+    /*margin-top: 5px;
+    margin-bottom: 5px;*/
+}
+
+.ccdTable tr { 
+    line-height: 24px; 
+}
+
 /*Selectize Styling*/
 
 .selectize-input {
     z-index: 0 !important;
+    padding: 5px 8px;
+}
+
+.selectize-control.multi .selectize-input.has-items {
+    padding: calc( 5px - 2px - 0px ) 6px calc( 5px - 2px - 3px - 0px ) !important;
 }
 
 /*Project Dropdown Styling*/
@@ -148,12 +303,12 @@ body,
 /*Hamburger Menu Styling*/
 
 #menu {
-    width: 29;
-    height: 29;
+    width: 26px;
+    height: 26px;
     padding: 4px 4px 4px 4px;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     z-index: 1;
     background-color: rgb(78, 78, 78);
     border-radius: 4px;
@@ -173,14 +328,14 @@ body,
   }
   
 .toggle {
-    margin-top: 2px;
+    margin-top: 3px;
     margin-left: -1px;    
 }
 
 .toggle > span{
     display: block;
-    width: 29px;
-    height: 5px;
+    width: 22px;
+    height: 3px;
     margin-bottom: 5px;
     position: relative;
     background: #d6d6d6;
@@ -190,7 +345,7 @@ body,
 }
 
 input#toggle:checked ~ .toggle > span{
-    transform: translateY(10px) rotate(-45deg);
+    transform: translateY(8px) rotate(-45deg);
 }
 
 input#toggle:checked ~ .toggle > span:nth-child(2){
@@ -199,7 +354,7 @@ input#toggle:checked ~ .toggle > span:nth-child(2){
 }
 
 input#toggle:checked ~ .toggle > span:nth-child(3){
-    transform: translateY(-10px) rotate(45deg);
+    transform: translateY(-8px) rotate(45deg);
 }
 
 .toggle:hover {
@@ -226,12 +381,12 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
 
 #legendDiv {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     background-color: rgb(78, 78, 78);
     height: auto;
     width: 250px;
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: none;
     /*overflow-x: hidden;
@@ -245,7 +400,7 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     margin: 5px;
     padding: 9px;
     background-color: #fff;
-    border-radius: 4px;
+    border-radius: 3px;
     color: rgb(78, 78, 78);
 }
 
@@ -281,11 +436,18 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     border: 2px solid rgba(0, 156, 171, 0.7);
 }
 
-.legendItemFed {
+.legendItemFedElig {
     height: 19px;
     width: 44px;
     background-color: rgba(255, 255, 255, 0);
-    border: 3px solid rgba(196, 16, 16, 1);
+    border: 3px solid rgba(6, 100, 158, 1);
+}
+
+.legendItemFedList {
+    height: 19px;
+    width: 44px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 3px solid rgba(209, 68, 2, 1);
 }
 
 .legendItemERGIS {
@@ -300,7 +462,7 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
 .legendItemIL {
     height: 21px;
     width: 46px;
-    background-color: rgba(240,148,215, 0.2);
+    background-color: rgba(240,148,215, 0.4);
     border: 2px solid rgba(138, 45, 113, 0.5);
 }
 
@@ -316,22 +478,29 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
 .legendItemHD {
     height: 21px;
     width: 46px;
-    background-color: rgba(252,223,104, 0.2);
+    background-color: rgba(252,223,104, 0.4);
     border: 2px solid rgba(99, 88, 41, 0.5);
 }
 
 .legendItemSCE {
     height: 21px;
     width: 46px;
-    background-color: rgba(149,185,131, 0.2);
+    background-color: rgba(149,185,131, 0.4);
     border: 2px solid rgba(50, 92, 28, 0.5);
+}
+
+.legendItemNRHP {
+    height: 21px;
+    width: 46px;
+    background-color: rgba(115, 71, 1, 0.3);
+    border: 2px solid rgba(15, 71, 1, 0.5);
 }
 
 .legendItemProj {
     height: 21px;
     width: 46px;
-    background-color: rgba(66, 206, 245, 0.1);
-    border: 2px solid rgba(23, 119, 145, 1);
+    background-color: rgba(217, 20, 20, 0.1);
+    border: 2px solid rgba(69, 0, 0, 1);
 }
 
 .legendItemProjBuff {
@@ -345,7 +514,7 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     display: flex;
 }
 
-#puidVis, #lpcVis, #fedVis, #ergisVis, #ilVis, #intVis, #hdVis, #sceVis, #projVis, #projBuffVis {
+#puidVis, #lpcVis, #fedVisElig, #fedVisList, #ergisVis, #nrhpVis, #ilVis, #intVis, #hdVis, #sceVis, #projVis, #projBuffVis {
     display: none;
 }
 
@@ -360,7 +529,7 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     color: black;
     border: 0px solid #e7e7e7;
     border-radius: 4px;
-    padding: 5px 9px;
+    padding: 5.5px 9px;
     text-align: center;
     font-family: 'Poppins', san-serif;
     font-weight: 400;
@@ -441,12 +610,13 @@ input:checked + .slider:before {
 /**Search Styling**/
 
 #addSearch {
-    width: 80%;
+    width: 82%;
 }
 
 #searchHolder {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
@@ -459,6 +629,10 @@ input:checked + .slider:before {
     border-radius: 4px;
     color: #7e7e7e;
     border: 1px solid #d0d0d0;
+}
+
+.esri-input[type=text] {
+    height: 30px;
 }
 
 .esri-input.esri-search__input::placeholder{
@@ -482,6 +656,9 @@ input:checked + .slider:before {
     background-color: #d6d6d6;
     border-radius: 4px;
     color: #333333;
+    height: 30px;
+    width: 30px;
+    margin-left: 5px;
 }
 
 .esri-widget--button:hover {
@@ -491,3 +668,46 @@ input:checked + .slider:before {
 .esri-widget--button:hover {
     background-color: #c75458;
 }
+
+/**Loader GIF Code**/
+
+/*#loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }*/
+  
+#loadingFedElig {
+    height: 18px;
+    width: 18px;
+    display: none;
+}
+
+#loadingFedList {
+    height: 18px;
+    width: 18px;
+    display: none;
+}
+
+#loadingLpc {
+    height: 18px;
+    width: 18px;
+    display: none;
+}
+
+/**Scrollbar Styling**/
+
+::-webkit-scrollbar {
+    width: 4px;
+    background-color: #f5f5f5;
+  }
+  
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #696969;
+  }
