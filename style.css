@@ -51,12 +51,59 @@ body,
     background-color: #c75458;
 }
 
+/*Warning Text Div Styling*/
+
+#warnDiv {
+    width: 600px;
+    height: 150px;
+    border-radius: 3px;
+    background-color: rgba(199, 84, 88, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+    pointer-events: none; 
+}
+
+.warnText {
+    font-size: 40px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.warnSubText {
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+}
+
+@keyframes pulse {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
+
+.pulse {
+    animation-name: pulse;
+    animation-duration: 2s;
+    /* If you want the animation keeps going */
+    animation-iteration-count: infinite;
+}
+
+
 /*Info Div Styling*/
 
 #infoDiv {
     width: 75%;
     /* min-height: 520px; */
-    max-width: 500px;
+    max-width: 650px;
     height: 70%;
     max-height: 600px;
     background-color: rgba(78, 78, 78);
@@ -100,21 +147,55 @@ body,
     color: #c75458;
 }
 
-.columns {
-    display: flex;
+.whiteSpace {
+    /*display: flex;*/
     margin-top: 25px;
-    height: 96%;
+    height: 90%;
     background-color: rgb(241, 241, 241);
     border-radius: 3px;
-    overflow-y: auto;
-}
-
-.columns div {
-    flex: 1;
-}
-
-.columnText {
     padding: 10px;
+}
+
+.textSpace {
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 10px;
+}
+
+.infoSectionText {
+    font-size: 17px;
+    font-weight: 600;
+    color: #4e4e4e;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.infoBodyTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4e4e4e;
+    padding-bottom: 7px;
+}
+
+.infoBodyText {
+    font-size: 13px;
+    font-weight: 400;
+    color: #4e4e4e;
+}
+
+.infoBodyTextBold {
+    padding-top: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+}
+
+.infoTable td {
+    padding: 8px;
+}
+
+.popupImg {
+    width: 250px;
 }
 
 /*Menu Div Styling*/
@@ -316,7 +397,8 @@ body,
     line-height: 31px;
     text-align: center;
     display: inline-block;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /*box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;*/
+    box-shadow: none;
 }
 
 #menu:hover {
@@ -388,7 +470,7 @@ input#toggle:checked ~ .toggle > span:nth-child(3){
     width: 250px;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    display: none;
+    display: block;
     /*overflow-x: hidden;
     overflow-y: hidden;*/
     overflow: hidden;
@@ -610,7 +692,7 @@ input:checked + .slider:before {
 /**Search Styling**/
 
 #addSearch {
-    width: 82%;
+    width: 80.5%;
 }
 
 #searchHolder {

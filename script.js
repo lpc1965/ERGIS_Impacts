@@ -691,6 +691,12 @@ require([
      * 
      * **********/
 
+    /**Error Catcher for All Queries**/
+
+    function catchLoadError() {
+      document.getElementById("warnDiv").style.display="flex"
+    }
+
     document.getElementById("doBtnCcd").addEventListener("click", doQueryCcd);
     document.getElementById("doBtnOne").addEventListener("click", doQueryOne);
     //document.getElementById("doBtnTwo").addEventListener("click", doQueryTwo);
@@ -712,7 +718,7 @@ require([
       //uniquePuidArray = [];
       params.where = "COUNDIST IN (" + ccdVar + ") AND " + fieldOne + operator + puidVal.value;
       console.log(params.where)
-      query.executeQueryJSON(ergisUrl, params).then(getResults).catch(promiseRejected);
+      query.executeQueryJSON(ergisUrl, params).then(getResults).catch();
     }
 
     function getResults(response) {
@@ -738,7 +744,7 @@ require([
       });
 
       for(var i=0; i<uniquePuidArray.length; i++) {
-        a1(uniquePuidArray[i]).then(a2)
+        a1(uniquePuidArray[i]).then(a2).catch(catchLoadError);
       };
     }
 
@@ -820,7 +826,7 @@ require([
       resultsLayerLPC.removeAll();
       //paramsTwo.where = "COUNDIST IN (" + ccdVar + ") AND LPCIMPTWO IN (" + lpcImpactValue + ")";
       paramsTwo.where = "COUNDIST IN (" + ccdVar + ") AND LPCIMPTWO IN ('LPC ELIGIBLE')";
-      query.executeQueryJSON(ergisUrl, paramsTwo).then(getResultsTwo).catch(promiseRejected);
+      query.executeQueryJSON(ergisUrl, paramsTwo).then(getResultsTwo).catch();
     }
 
     function getResultsTwo(response) {
@@ -830,6 +836,7 @@ require([
       //resultsLayer.addMany(ergisResults); //temp add points layer
       selectLPCTaxLots(ergisResults);
       $("#loadingLpc").show();
+      $("#warnDiv").fadeOut();
     }
 
     let lpcBBLArray = [];
@@ -848,7 +855,7 @@ require([
       });
 
       for(var i=0; i<uniqueLpcArray.length; i++) {
-        b1(uniqueLpcArray[i]).then(b2)
+        b1(uniqueLpcArray[i]).then(b2).catch(catchLoadError);
       };
     }
 
@@ -883,6 +890,7 @@ require([
         () => !layerView.updating,
         () => {
           $("#loadingLpc").hide();
+          $("#warnDiv").fadeOut();
         })
     });
 
@@ -928,7 +936,7 @@ require([
       resultsLayerFED.removeAll();
       //paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN (" + fedImpactValue + ")";
       paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR Eligible')";
-      query.executeQueryJSON(ergisUrl, paramsThree).then(getResultsThree).catch(promiseRejected);
+      query.executeQueryJSON(ergisUrl, paramsThree).then(getResultsThree).catch();
     }
 
     function getResultsThree(response) {
@@ -954,7 +962,7 @@ require([
       });
 
       for(var i = 0; i<uniqueFedArray.length; i++ ) {
-        c1(uniqueFedArray[i]).then(c2)
+        c1(uniqueFedArray[i]).then(c2).catch(catchLoadError);
       }
     }
 
@@ -990,6 +998,7 @@ require([
         () => !layerView.updating,
         () => {
           $("#loadingFedElig").hide();
+          $("#warnDiv").fadeOut();
         })
     });
 
@@ -1016,7 +1025,7 @@ require([
       resultsLayerFEDTwo.removeAll();
       //paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN (" + fedImpactValue + ")";
       paramsFour.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR LISTED')";
-      query.executeQueryJSON(ergisUrl, paramsFour).then(getResultsFour).catch(promiseRejected);
+      query.executeQueryJSON(ergisUrl, paramsFour).then(getResultsFour).catch();
     }
 
     function getResultsFour(response) {
@@ -1042,7 +1051,7 @@ require([
       });
 
       for(var i = 0; i<uniqueFedArrayTwo.length; i++ ) {
-        d1(uniqueFedArrayTwo[i]).then(d2)
+        d1(uniqueFedArrayTwo[i]).then(d2).catch(catchLoadError);
       }
     }
 
@@ -1078,9 +1087,10 @@ require([
         () => !layerView.updating,
         () => {
           $("#loadingFedList").hide();
+          $("#warnDiv").fadeOut();
         })
     });
-    
+
     /*********Initialize Selectize.js Mult-Select Dropdowns*********/
 
     const $select = $("#ccdFilter").selectize({
@@ -1147,6 +1157,8 @@ require([
         //Remove Warning Message
 
         document.getElementById("warningDiv").style.display="none";
+
+        ccdNum.style.fontSize = "17px";
 
         //Zoom to Council District 01
         taxLots.queryExtent().then((results) => {
@@ -1269,9 +1281,9 @@ require([
 
       const holder = document.getElementById("ccdNum");
 
-      if (ccdVar.length > 1) {
+      if (ccdVar.length > 4) {
         holder.innerHTML = "Council Districts" + ccdVarAmper + ""
-      } else if (ccdVar.length == 1) {
+      } else if (ccdVar.length == 4) {
         holder.innerHTML = "Council District" + ccdVarAmper + ""
       } else if (ccdVar.length < 1) {
         holder.innerHTML = "No Council District Selected"
@@ -1283,8 +1295,13 @@ require([
         document.getElementById("warningDiv").style.display="none";
       }
 
+      const ccdNum = document.getElementById("ccdNum");
+
+      if (ccdVar.length > 22) {
+        ccdNum.style.fontSize = "12px";
+      } else {}
+
     }
-    
 
     /*********LPC Designations Layer ON/OFF Swtich*********/
 
@@ -1438,10 +1455,10 @@ require([
         $("#toggle").click(function(){
             $("#legendDiv").fadeToggle(500);
             if (menuToggle == 0) {
-              document.getElementById("menu").style.boxShadow="none"
+              document.getElementById("menu").style.boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
               menuToggle = 1;
             } else {
-              document.getElementById("menu").style.boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
+              document.getElementById("menu").style.boxShadow="none"
               menuToggle = 0;
             }
         })
