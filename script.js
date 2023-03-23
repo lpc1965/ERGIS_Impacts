@@ -697,6 +697,8 @@ require([
       document.getElementById("warnDiv").style.display="flex"
     }
 
+    /*********************************/
+
     document.getElementById("doBtnCcd").addEventListener("click", doQueryCcd);
     document.getElementById("doBtnOne").addEventListener("click", doQueryOne);
     //document.getElementById("doBtnTwo").addEventListener("click", doQueryTwo);
@@ -756,6 +758,8 @@ require([
       return taxLots.queryFeatures(query);
     }
 
+
+
     function a2(p) {
       const lotResults = p.features.map(function (feature) {
           feature.symbol = {
@@ -767,7 +771,7 @@ require([
           outline: {
               color: [0, 0, 0, 1],
               width: 1.5
-          }
+            }
           };
           return feature
       })
