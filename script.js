@@ -1141,6 +1141,10 @@ require([
         selectize.clear();
         selectize.setValue(selectize.search("01").items[0].id);
 
+        //Clear PUID search bar
+
+        document.getElementById('puidSelect').value = '';
+
         //Remove items from legend
         document.getElementById("puidVis").style.display="none"
         document.getElementById("lpcVis").style.display="none"
