@@ -58,6 +58,7 @@ require([
     const ergis = new FeatureLayer({
       title: "Ergis Points",
       url: "https://services5.arcgis.com/Oos4pNA2538iVFA1/arcgis/rest/services/ERGIS_Impact_Points_CCD/FeatureServer/0",
+      definitionExpression: "AGENCYPROJ <> 'NYC ECC'",
       visible: false,
       renderer: ergisRenderer,
       effect: ergisEffect,
@@ -718,7 +719,7 @@ require([
       resultsLayerPUID.removeAll();
       //puidArray = [];
       //uniquePuidArray = [];
-      params.where = "COUNDIST IN (" + ccdVar + ") AND " + fieldOne + operator + puidVal.value;
+      params.where = "AGENCYPROJ <> 'NYC ECC' AND COUNDIST IN (" + ccdVar + ") AND " + fieldOne + operator + puidVal.value;
       console.log(params.where)
       query.executeQueryJSON(ergisUrl, params).then(getResults).catch();
     }
@@ -829,7 +830,7 @@ require([
     function doQueryTwo() {
       resultsLayerLPC.removeAll();
       //paramsTwo.where = "COUNDIST IN (" + ccdVar + ") AND LPCIMPTWO IN (" + lpcImpactValue + ")";
-      paramsTwo.where = "COUNDIST IN (" + ccdVar + ") AND LPCIMPTWO IN ('LPC ELIGIBLE')";
+      paramsTwo.where = "AGENCYPROJ <> 'NYC ECC' AND COUNDIST IN (" + ccdVar + ") AND LPCIMPTWO IN ('LPC ELIGIBLE')";
       query.executeQueryJSON(ergisUrl, paramsTwo).then(getResultsTwo).catch();
     }
 
@@ -939,7 +940,7 @@ require([
     function doQueryThree() {
       resultsLayerFED.removeAll();
       //paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN (" + fedImpactValue + ")";
-      paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR Eligible')";
+      paramsThree.where = "AGENCYPROJ <> 'NYC ECC' AND COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR Eligible')";
       query.executeQueryJSON(ergisUrl, paramsThree).then(getResultsThree).catch();
     }
 
@@ -1028,7 +1029,7 @@ require([
     function doQueryFour() {
       resultsLayerFEDTwo.removeAll();
       //paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN (" + fedImpactValue + ")";
-      paramsFour.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR LISTED')";
+      paramsFour.where = "AGENCYPROJ <> 'NYC ECC' AND COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR LISTED')";
       query.executeQueryJSON(ergisUrl, paramsFour).then(getResultsFour).catch();
     }
 
