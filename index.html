@@ -1,21 +1,20 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1,maximum-scale=1,user-scalable=no"
-    />
 
-    <title>ERGIS Explorer</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 
-    <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/dark/main.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/css/selectize.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" />
-    <link rel="stylesheet" href="style.css" />
+  <title>ERGIS Explorer</title>
 
-    <!--Arcade script and loop to populate tax lots with intersecting point field values-->
-    <script type="text/arcgis-arcade" id="ergis-arcade">
+  <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/dark/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/css/selectize.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!--Arcade script and loop to populate tax lots with intersecting point field values-->
+  <script type="text/arcgis-arcade" id="ergis-arcade">
 
       var sites = Intersects(
         $feature,
@@ -76,346 +75,374 @@
       }
 
     </script>
-    <!--End Arcade Script-->
+  <!--End Arcade Script-->
 
-  </head>
-  <body>
-    <div id="viewDiv"></div>
+</head>
 
-    <div id="warnDiv">
-      <div class="warnText pulse">Error Loading Findings</div>
-      <div class="warnSubText pulse">Reduce target City Council Districts and Try Again</div>
-    </div>
+<body>
+  <div id="viewDiv"></div>
 
-    <div id="menu">
-      <input type="checkbox" id="toggle" checked>
-      <label for="toggle" class="toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-    </div>
+  <div id="warnDiv">
+    <div class="warnText pulse">Error Loading Findings</div>
+    <div class="warnSubText pulse">Reduce target City Council Districts and Try Again</div>
+  </div>
 
-    <div id="legendDiv">
-      <span class="legendTitle">Legend</span>
-      <div id="legendContainer">
-        <div class="indLegCont">
-          <div id="ergisVis" class="legendItemHolder">
-            <div class="legendItemERGIS"></div>
-            <span class="legendText">ERGIS Project Points</span>
-          </div>
-          <div id="puidVis" class="legendItemHolder">
-            <div class="legendItemPUID"></div>
-            <span class="legendText">PUID Impact Tax Lots</span>
-          </div>
-          <div id="lpcVis" class="legendItemHolder">
-            <div class="legendItemLPC"></div>
-            <span class="legendText">LPC 'Eligible' Tax Lots</span>
-          </div>
-          <div id="fedVisElig" class="legendItemHolder">
-            <div class="legendItemFedElig"></div>
-            <span class="legendText">S/NR 'Eligible' Tax Lots</span>
-          </div>
-          <div id="fedVisList" class="legendItemHolder">
-            <div class="legendItemFedList"></div>
-            <span class="legendText">S/NR 'Listed' Tax Lots</span>
-          </div>
-          <div id="ilVis" class="legendItemHolder">
-            <div class="legendItemIL"></div>
-            <span class="legendText">Individual Landmark</span>
-          </div>
-          <div id="intVis" class="legendItemHolder">
-            <div class="legendItemINT"></div>
-            <span class="legendText">Interior Landmark</span>
-          </div>
-          <div id="nrhpVis" class="legendItemHolder">
-            <div class="legendItemNRHP"></div>
-            <span class="legendText">National Register Listings</span>
-          </div>
-          <div id="hdVis" class="legendItemHolder">
-            <div class="legendItemHD"></div>
-            <span class="legendText">Historic District</span>
-          </div>
-          <div id="sceVis" class="legendItemHolder">
-            <div class="legendItemSCE"></div>
-            <span class="legendText">Scenic Landmark</span>
-          </div>
-          <div id="projVis" class="legendItemHolder">
-            <div class="legendItemProj"></div>
-            <span class="legendText">DCP Study Areas</span>
-          </div>
-          <div id="projBuffVis" class="legendItemHolder">
-            <div class="legendItemProjBuff"></div>
-            <span class="legendText">Study Area 400' Buffer</span>
-          </div>
-          <div id="ccdVis" class="legendItemHolder">
-            <div class="legendItemCC"></div>
-            <span class="legendText">City Council Districts</span>
-          </div>
-         
+  <div id="menu">
+    <input type="checkbox" id="toggle" checked>
+    <label for="toggle" class="toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </div>
+
+  <div id="legendDiv">
+    <span class="legendTitle">Legend</span>
+    <div id="legendContainer">
+      <div class="indLegCont">
+        <div id="ergisVis" class="legendItemHolder">
+          <div class="legendItemERGIS"></div>
+          <span class="legendText">ERGIS Project Points</span>
         </div>
-      </div>
-    </div>
-    
-    <div class="titleDiv">
-      <div class="titleText">ERGIS Data Explorer</div>
-      <div id="infoButton" class="infoButton">
-        <i class="far fa-question-circle"></i>
-      </div>
-    </div>
-
-    <div id="infoDiv">
-          <div class="infoTitle">How to use the ERGIS Data Explorer</div>
-          <a class="closeInfo">
-            <i id="closeInfo" class="fa-solid fa-xmark"></i>
-          </a>
-          <div class="whiteSpace">
-            <div class="textSpace">
-              <div class="infoSectionText">Application Overview</div>
-              <div class="infoBodyText">The purpose of the ERGIS Data Explorer is to enable LPC staff to easily locate information on project environmental review (ER) findings entered into the agency's Environmental Review Geographic Information System (ERGIS). The core function of the application is to highlight NYC tax lots within the bounds of selected city council districts that contain either a selected ERGIS Project Unique Identifier (PUID) or an LPC or State/National Register finding.</div>
-              <br>
-              <div class="infoSectionText">How to Locate ERGIS PUIDs and ER Findings in 2 Steps</div>
-              <hr class="infoHr">
-              <table class="infoTable">
-                <tbody>
-                  <tr>
-                    <td width='40%'>
-                      <img class="popupImg" src="assets/ccdFilter.PNG">
-                      <img class="popupImg" src="assets/ccdConfirm.PNG">
-                    </td>
-                    <td width='60%'>
-                      <div class="infoBodyTitle">1. Select City Council Districts</div>
-                      <div class="infoBodyText">To begin, select a single or multiple City Council Districts (CCD) from the multi-select dropdown. Once your selection is made press the 'search' button and the application will zoom to the selected district(s). You can confirm your selection through the red text 'City Council District' under step 2. To reset the filter to CCD 1, press the 'reset' button.</div>
-                      <div class="infoBodyTextBold">Please note that performing PUID or findings searches in more than three target CCDs may produce innacurate results.</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width='40%'>
-                      <img class="popupImg" src="assets/puidFinder.PNG">
-                    </td>
-                    <td width='60%'>
-                      <div class="infoBodyTitle">2A. Find a PUID</div>
-                      <div class="infoBodyText">Search for a specific PUID within the selected CCDs by entering it in the search bar. Press the 'search' button to complete. If the PUID is found within the selected CCD it the application will zoom to it and the tax lots containing the PUIDs will be symbolized with a black outline and hatching.</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width='40%'>
-                      <img class="popupImg" src="assets/findingToggle.PNG">
-                    </td>
-                    <td width='60%'>
-                      <div class="infoBodyTitle">2B. Toggle LPC or State/National Registers Findings</div>
-                      <div class="infoBodyText">Within the selected CCDs, you can highlight tax lots that contain LPC eligible, S/NR eligible or S/NR listed ERGIS points by using the toggle switches. Clicking the toggle switches will highlight all tax lots that contain the chosen findings within the selected CCDs.</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="infoSectionText">Context Data and Address / BBL Search</div>
-              <hr class="infoHr">
-              <table class="infoTable">
-                <tbody>
-                  <tr>
-                    <td width='40%'>
-                      <img class="popupImg" src="assets/layerToggle.PNG">
-                    </td>
-                    <td width='60%'>
-                      <div class="infoBodyTitle">Add Context Data</div>
-                      <div class="infoBodyText">Additional context datasets are available within the application and include ERGIS project points, LPC designation boundaries, National Register listing boundaries and selected Department of City Planning (DCP) Study Areas. Context data can be toggled on and off with the switches to the right of each layer name.</div>
-                  </tr>
-                  <tr>
-                    <td width='40%'>
-                      <img class="popupImg" src="assets/addSearch.PNG">
-                    </td>
-                    <td width='60%'>
-                      <div class="infoBodyTitle">Search for an Address or BBL</div>
-                      <div class="infoBodyText">The search widget included in the application allows you to either search by a New York City address or by BBL. When the application loads the search widget default setting is for an address search but can be toggled to BBL by clicking the 'toggle' button.</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="infoSectionText">Understanding Popup Information</div>
-              <hr class="infoHr">
-              <table class="infoTable">
-                <tbody>
-                  <tr>
-                    <td width='40%'>
-                      <img class="popupImg" src="assets/popup.PNG">
-                    </td>
-                    <td style="width: 60%; vertical-align: top;">
-                      <div class="infoBodyTitle">Tax Lot Popup Info</div>
-                      <div class="infoBodyText">Application users can click on NYC tax lots to get a chronological list of ERGIS points that are contained within. ERGIS Point information includes PUID, project and site names, address, LPC and Federal findings and date completed. Chronological ordering is based on the date completed value of each point. If no ERGIS points are contained within the clicked tax lot the message 'No ERGIS sites in this tax lot' will appear in the popup.</div>
-                      <br>
-                      <div class="infoBodyText">Top level information for the tax lot is also included and is located at the top of the popup window.</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-    </div>
-
-    <div id="optionsDiv">
-      <div class="lineDiv"><span class="labelNum">Search by Address or BBL</span></div>
-      <div class="section">
-        <span class="labelSubText" id="searchText">Find an Address</span>
-          <div id="searchHolder">
-            <button class="button" id="toggleSearch">Toggle</button>
-            <div id="addSearch"></div>
-          </div>
-      </div>
-      <div class="lineDiv"><span class="labelNum">Locate ERGIS PUIDs & ER Findings</span></div>
-      <div class="section">
-        <div class="filterDiv">
-          <div class="lineDiv"><span class="labelText">1. Select City Council Districts</span><!--<div class="line"></div>--></div>
-          <span class="labelSubText">Filter Tax Lots by Council District</span>
-          <select id="ccdFilter" multiple class="selectize" placeholder="Select a Council District..."></select>
-          <div class="buttonHolder">
-            <button class="button" id="doBtnCcd">Search</button>
-            <button class="button" id="cancelBtnCcd">Reset</button>
-          </div>
-          <div id="warningDiv">
-            <table class="warningTable">
-              <tbody>
-                <tr>
-                  <td><span id="warning">Warning: selecting more than three Council Districts may effect accuracy of PUID or Findings results.</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div id="puidVis" class="legendItemHolder">
+          <div class="legendItemPUID"></div>
+          <span class="legendText">PUID Impact Tax Lots</span>
         </div>
-        <div class="lineDiv"><span class="labelText">2. Find a PUID or Toggle Findings in:</span><!--<div class="line"></div>--></div>
-        <div>
-          <table class="ccdTable">
+        <div id="lpcVis" class="legendItemHolder">
+          <div class="legendItemLPC"></div>
+          <span class="legendText">LPC 'Eligible' Tax Lots</span>
+        </div>
+        <div id="fedVisElig" class="legendItemHolder">
+          <div class="legendItemFedElig"></div>
+          <span class="legendText">S/NR 'Eligible' Tax Lots</span>
+        </div>
+        <div id="fedVisList" class="legendItemHolder">
+          <div class="legendItemFedList"></div>
+          <span class="legendText">S/NR 'Listed' Tax Lots</span>
+        </div>
+        <div id="ilVis" class="legendItemHolder">
+          <div class="legendItemIL"></div>
+          <span class="legendText">Individual Landmark</span>
+        </div>
+        <div id="intVis" class="legendItemHolder">
+          <div class="legendItemINT"></div>
+          <span class="legendText">Interior Landmark</span>
+        </div>
+        <div id="nrhpVis" class="legendItemHolder">
+          <div class="legendItemNRHP"></div>
+          <span class="legendText">National Register Listings</span>
+        </div>
+        <div id="hdVis" class="legendItemHolder">
+          <div class="legendItemHD"></div>
+          <span class="legendText">Historic District</span>
+        </div>
+        <div id="sceVis" class="legendItemHolder">
+          <div class="legendItemSCE"></div>
+          <span class="legendText">Scenic Landmark</span>
+        </div>
+        <div id="projVis" class="legendItemHolder">
+          <div class="legendItemProj"></div>
+          <span class="legendText">DCP Study Areas</span>
+        </div>
+        <div id="projBuffVis" class="legendItemHolder">
+          <div class="legendItemProjBuff"></div>
+          <span class="legendText">Study Area 400' Buffer</span>
+        </div>
+        <div id="ccdVis" class="legendItemHolder">
+          <div class="legendItemCC"></div>
+          <span class="legendText">City Council Districts</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="titleDiv">
+    <div class="titleText">ERGIS Data Explorer</div>
+    <div id="infoButton" class="infoButton">
+      <i class="far fa-question-circle"></i>
+    </div>
+  </div>
+
+  <div id="infoDiv">
+    <div class="infoTitle">How to use the ERGIS Data Explorer</div>
+    <a class="closeInfo">
+      <i id="closeInfo" class="fa-solid fa-xmark"></i>
+    </a>
+    <div class="whiteSpace">
+      <div class="textSpace">
+        <div class="infoSectionText">Application Overview</div>
+        <div class="infoBodyText">The purpose of the ERGIS Data Explorer is to enable LPC staff to easily locate
+          information on project environmental review (ER) findings entered into the agency's Environmental Review
+          Geographic Information System (ERGIS). The core function of the application is to highlight NYC tax lots
+          within the bounds of selected city council districts that contain either a selected ERGIS Project Unique
+          Identifier (PUID) or an LPC or State/National Register finding.</div>
+        <br>
+        <div class="infoSectionText">How to Locate ERGIS PUIDs and ER Findings in 2 Steps</div>
+        <hr class="infoHr">
+        <table class="infoTable">
+          <tbody>
+            <tr>
+              <td width='40%'>
+                <img class="popupImg" src="assets/ccdFilter.PNG">
+                <img class="popupImg" src="assets/ccdConfirm.PNG">
+              </td>
+              <td width='60%'>
+                <div class="infoBodyTitle">1. Select City Council Districts</div>
+                <div class="infoBodyText">To begin, select a single or multiple City Council Districts (CCD) from the
+                  multi-select dropdown. Once your selection is made press the 'search' button and the application will
+                  zoom to the selected district(s). You can confirm your selection through the red text 'City Council
+                  District' under step 2. To reset the filter to CCD 1, press the 'reset' button.</div>
+                <div class="infoBodyTextBold">Please note that performing PUID or findings searches in more than three
+                  target CCDs may produce innacurate results.</div>
+              </td>
+            </tr>
+            <tr>
+              <td width='40%'>
+                <img class="popupImg" src="assets/puidFinder.PNG">
+              </td>
+              <td width='60%'>
+                <div class="infoBodyTitle">2A. Find a PUID</div>
+                <div class="infoBodyText">Search for a specific PUID within the selected CCDs by entering it in the
+                  search bar. Press the 'search' button to complete. If the PUID is found within the selected CCD it the
+                  application will zoom to it and the tax lots containing the PUIDs will be symbolized with a black
+                  outline and hatching.</div>
+              </td>
+            </tr>
+            <tr>
+              <td width='40%'>
+                <img class="popupImg" src="assets/findingToggle.PNG">
+              </td>
+              <td width='60%'>
+                <div class="infoBodyTitle">2B. Toggle LPC or State/National Registers Findings</div>
+                <div class="infoBodyText">Within the selected CCDs, you can highlight tax lots that contain LPC
+                  eligible, S/NR eligible or S/NR listed ERGIS points by using the toggle switches. Clicking the toggle
+                  switches will highlight all tax lots that contain the chosen findings within the selected CCDs.</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="infoSectionText">Context Data and Address / BBL Search</div>
+        <hr class="infoHr">
+        <table class="infoTable">
+          <tbody>
+            <tr>
+              <td width='40%'>
+                <img class="popupImg" src="assets/layerToggle.PNG">
+              </td>
+              <td width='60%'>
+                <div class="infoBodyTitle">Add Context Data</div>
+                <div class="infoBodyText">Additional context datasets are available within the application and include
+                  ERGIS project points, LPC designation boundaries, National Register listing boundaries and selected
+                  Department of City Planning (DCP) Study Areas. Context data can be toggled on and off with the
+                  switches to the right of each layer name.</div>
+            </tr>
+            <tr>
+              <td width='40%'>
+                <img class="popupImg" src="assets/addSearch.PNG">
+              </td>
+              <td width='60%'>
+                <div class="infoBodyTitle">Search for an Address or BBL</div>
+                <div class="infoBodyText">The search widget included in the application allows you to either search by a
+                  New York City address or by BBL. When the application loads the search widget default setting is for
+                  an address search but can be toggled to BBL by clicking the 'toggle' button.</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="infoSectionText">Understanding Popup Information</div>
+        <hr class="infoHr">
+        <table class="infoTable">
+          <tbody>
+            <tr>
+              <td width='40%'>
+                <img class="popupImg" src="assets/popup.PNG">
+              </td>
+              <td style="width: 60%; vertical-align: top;">
+                <div class="infoBodyTitle">Tax Lot Popup Info</div>
+                <div class="infoBodyText">Application users can click on NYC tax lots to get a chronological list of
+                  ERGIS points that are contained within. ERGIS Point information includes PUID, project and site names,
+                  address, LPC and Federal findings and date completed. Chronological ordering is based on the date
+                  completed value of each point. If no ERGIS points are contained within the clicked tax lot the message
+                  'No ERGIS sites in this tax lot' will appear in the popup.</div>
+                <br>
+                <div class="infoBodyText">Top level information for the tax lot is also included and is located at the
+                  top of the popup window.</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="optionsDiv">
+    <div class="lineDiv"><span class="labelNum">Search by Address or BBL</span></div>
+    <div class="section">
+      <span class="labelSubText" id="searchText">Find an Address</span>
+      <div id="searchHolder">
+        <button class="button" id="toggleSearch">Toggle</button>
+        <div id="addSearch"></div>
+      </div>
+    </div>
+    <div class="lineDiv"><span class="labelNum">Locate ERGIS PUIDs & ER Findings</span></div>
+    <div class="section">
+      <div class="filterDiv">
+        <div class="lineDiv"><span class="labelText">1. Select City Council
+            Districts</span><!--<div class="line"></div>--></div>
+        <span class="labelSubText">Filter Tax Lots by Council District</span>
+        <select id="ccdFilter" multiple class="selectize" placeholder="Select a Council District..."></select>
+        <div class="buttonHolder">
+          <button class="button" id="doBtnCcd">Search</button>
+          <button class="button" id="cancelBtnCcd">Reset</button>
+        </div>
+        <div id="warningDiv">
+          <table class="warningTable">
             <tbody>
               <tr>
-                <td><span id="ccdNum">Council District 01</span></td>
+                <td><span id="warning">Warning: selecting more than three Council Districts may effect accuracy of PUID
+                    or Findings results.</span></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="filterDiv">
-          <span id="puidLabel" class="labelSubText">Find Tax Lots by ERGIS PUID</span>
-          <input type="text" autocomplete="off" id="puidSelect" name="puidSelect" placeholder="Enter a PUID ">
-          <div class="buttonHolder">
-            <button class="button" id="doBtnOne">Search</button>
-            <button class="button" id="cancelBtnOne">Clear</button>
-          </div> 
+      </div>
+      <div class="lineDiv"><span class="labelText">2. Find a PUID or Toggle Findings
+          in:</span><!--<div class="line"></div>--></div>
+      <div>
+        <table class="ccdTable">
+          <tbody>
+            <tr>
+              <td><span id="ccdNum">Council District 01</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="filterDiv">
+        <span id="puidLabel" class="labelSubText">Find Tax Lots by ERGIS PUID</span>
+        <input type="text" autocomplete="off" id="puidSelect" name="puidSelect" placeholder="Enter a PUID ">
+        <div class="buttonHolder">
+          <button class="button" id="doBtnOne">Search</button>
+          <button class="button" id="cancelBtnOne">Clear</button>
         </div>
-        <div class="switchDiv">
-          <span class="labelSubText">Toggle LPC 'Eligible' Findings</span>
-          <div class="switchSubDiv">
-            <div>
-              <img id='loadingLpc' src="https://i.stack.imgur.com/kOnzy.gif"/>
-            </div>
-            <label class="switch">
-              <input type="checkbox" id="lpcCheckButton">
-              <span class="slider round"></span>
-            </label>
-          </div> 
-          <!--<select id="lpcFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
+      </div>
+      <div class="switchDiv">
+        <span class="labelSubText">Toggle LPC 'Eligible' Findings</span>
+        <div class="switchSubDiv">
+          <div>
+            <img id='loadingLpc' src="https://i.stack.imgur.com/kOnzy.gif" />
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="lpcCheckButton">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <!--<select id="lpcFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
           <div class="buttonHolder">
             <button class="button" id="doBtnTwo">Search</button>
             <button class="button" id="cancelBtnTwo">Clear</button>
           </div>-->
-        </div>
-        <div class="switchDiv">
-          <span class="labelSubText">Toggle S/NR 'Eligible' Findings</span>
-          <div class="switchSubDiv">
-            <div>
-              <img id='loadingFedElig' src="https://i.stack.imgur.com/kOnzy.gif"/>
-            </div>
-            <label class="switch">
-              <input type="checkbox" id="fedCheckEligButton">
-              <span class="slider round"></span>
-            </label>
-          </div>       
-          <!--<select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
-          <div class="buttonHolder">
-            <button class="button" id="doBtnThree">Search</button>
-            <button class="button" id="cancelBtnThree">Clear</button>
-          </div>-->
-        </div>
-        <div class="switchDiv">
-          <span class="labelSubText">Toggle S/NR 'Listed' Findings</span>
-          <div class="switchSubDiv">
-            <div>
-              <img id='loadingFedList' src="https://i.stack.imgur.com/kOnzy.gif"/>
-            </div>
-            <label class="switch">
-              <input type="checkbox" id="fedCheckListButton">
-              <span class="slider round"></span>
-            </label>
-          </div>       
-          <!--<select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
-          <div class="buttonHolder">
-            <button class="button" id="doBtnThree">Search</button>
-            <button class="button" id="cancelBtnThree">Clear</button>
-          </div>-->
-        </div>
       </div>
-      <div class="lineDiv"><span class="labelNum">Context Data</span></div>
-      <div class="section">
-        <div class="layerDiv">
-          <span class="labelSubText">ERGIS Project Points</span>
+      <div class="switchDiv">
+        <span class="labelSubText">Toggle S/NR 'Eligible' Findings</span>
+        <div class="switchSubDiv">
+          <div>
+            <img id='loadingFedElig' src="https://i.stack.imgur.com/kOnzy.gif" />
+          </div>
           <label class="switch">
-              <input type="checkbox" id="layerButton">
-              <span class="slider round"></span>
-          </label>
-        </div>
-        <div class="layerDiv">
-          <span class="labelSubText">DCP Study Areas</span>
-          <label class="switch">
-              <input type="checkbox" id="projlayerButton">
-              <span class="slider round"></span>
-          </label>
-        </div>
-        <div id="projFilterHolder">
-          <span class="projFiltText">Filter Major Projects</span>
-          <select id="projFilter" required="required" class="projDropDown">
-            <option value="" selected>All Study Areas</option>
-            <option value="Atlantic Yards Arena and Redevelopment Project Study Area">Atlantic Yards</option>
-            <option value="Downtown Far Rockaway Redevelopment Project Study Area">Downtown Far Rockaway</option>
-            <option value="East Harlem Rezoning Study Area">East Harlem</option>
-            <option value="East New York Rezoning Study Area">East New York</option>
-            <option value="East Village/Lower East Side Rezoning Study Area">East Village/Lower East Side</option>
-            <option value="Empire Station Complex Study Area">Empire Station Complex</option>
-            <option value="Special Garment Center District NE">Special Garment Center District NE</option>
-            <option value="Special Garment Center District SE">Special Garment Center District SE</option>
-            <option value="Special Garment Center District SW">Special Garment Center District SW</option>
-            <option value="Special Garment Center District NW">Special Garment Center District NW</option>
-            <option value="Gowanus Neighborhood Rezoning Study Area">Gowanus Neighborhood</option>
-            <option value="Greater East Midtown Study Area">Greater East Midtown</option>
-            <option value="Hudson Yards Rezoning Study Area">Hudson Yards Rezoning</option>
-            <option value="Union Square South Hotel Special Permit Study Area">Union Square South</option>
-          </select>
-        </div>
-        <div class="layerDiv">
-          <span class="labelSubText">LPC Designations</span>
-          <label class="switch">
-            <input type="checkbox" id="lpcLayerButton">
+            <input type="checkbox" id="fedCheckEligButton">
             <span class="slider round"></span>
           </label>
         </div>
-        <div class="layerDiv">
-          <span class="labelSubText">National Register Listings</span>
+        <!--<select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
+          <div class="buttonHolder">
+            <button class="button" id="doBtnThree">Search</button>
+            <button class="button" id="cancelBtnThree">Clear</button>
+          </div>-->
+      </div>
+      <div class="switchDiv">
+        <span class="labelSubText">Toggle S/NR 'Listed' Findings</span>
+        <div class="switchSubDiv">
+          <div>
+            <img id='loadingFedList' src="https://i.stack.imgur.com/kOnzy.gif" />
+          </div>
           <label class="switch">
-            <input type="checkbox" id="nrhpLayerButton">
+            <input type="checkbox" id="fedCheckListButton">
             <span class="slider round"></span>
           </label>
         </div>
-        <div class="layerDiv">
-          <span class="labelSubText">City Council Districts</span>
-          <label class="switch">
-            <input type="checkbox" id="ccdLayerButton" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
+        <!--<select id="fedFilter" multiple class="demo-default" placeholder="Select an impact..."></select>
+          <div class="buttonHolder">
+            <button class="button" id="doBtnThree">Search</button>
+            <button class="button" id="cancelBtnThree">Clear</button>
+          </div>-->
       </div>
     </div>
+    <div class="lineDiv"><span class="labelNum">Context Data</span></div>
+    <div class="section">
+      <div class="layerDiv">
+        <span class="labelSubText">ERGIS Project Points</span>
+        <label class="switch">
+          <input type="checkbox" id="layerButton">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="layerDiv">
+        <span class="labelSubText">DCP Study Areas</span>
+        <label class="switch">
+          <input type="checkbox" id="projlayerButton">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div id="projFilterHolder">
+        <span class="projFiltText">Filter Major Projects</span>
+        <select id="projFilter" required="required" class="projDropDown">
+          <option value="" selected>All Study Areas</option>
+          <option value="Atlantic Yards Arena and Redevelopment Project Study Area">Atlantic Yards</option>
+          <option value="Downtown Far Rockaway Redevelopment Project Study Area">Downtown Far Rockaway</option>
+          <option value="East Harlem Rezoning Study Area">East Harlem</option>
+          <option value="East New York Rezoning Study Area">East New York</option>
+          <option value="East Village/Lower East Side Rezoning Study Area">East Village/Lower East Side</option>
+          <option value="Empire Station Complex Study Area">Empire Station Complex</option>
+          <option value="Gowanus Neighborhood Rezoning Study Area">Gowanus Neighborhood</option>
+          <option value="Greater East Midtown Study Area">Greater East Midtown</option>
+          <option value="Hudson Yards Rezoning Study Area">Hudson Yards Rezoning</option>
+          <option value="Inwood Rezoning Study Area (Proposed)">Inwood Rezoning Study Area (Proposed)</option>
+          <option value="Special Garment Center Districts (Adopted)">Special Garment Center Districts (Adopted)</option>
+          <option value="Special Garment Center Districts (Proposed)">Special Garment Center Districts (Proposed)
+          </option>
+          <option value="Union Square South Hotel Special Permit Study Area">Union Square South</option>
+        </select>
+      </div>
+      <div class="layerDiv">
+        <span class="labelSubText">LPC Designations</span>
+        <label class="switch">
+          <input type="checkbox" id="lpcLayerButton">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="layerDiv">
+        <span class="labelSubText">National Register Listings</span>
+        <label class="switch">
+          <input type="checkbox" id="nrhpLayerButton">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="layerDiv">
+        <span class="labelSubText">City Council Districts</span>
+        <label class="switch">
+          <input type="checkbox" id="ccdLayerButton" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+  </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/js/standalone/selectize.min.js"></script>
-    <script src="https://js.arcgis.com/4.24/"></script>
-    <script src="script.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/js/standalone/selectize.min.js"></script>
+  <script src="https://js.arcgis.com/4.24/"></script>
+  <script src="script.js"></script>
 
-  </body>
+</body>
+
 </html>
