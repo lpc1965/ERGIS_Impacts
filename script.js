@@ -150,12 +150,12 @@ require([
       minScale: 36112,
       labelPlacement: "above-center",
       labelExpressionInfo: {
-        expression: "'Council District: ' + $feature.COUNDIST"
+        expression: "'Council District: ' + $feature.CounDist"
       }
     };
 
     const ccdBoundaries = new FeatureLayer({
-      //url: "https://services5.arcgis.com/Oos4pNA2538iVFA1/arcgis/rest/services/City_Council_Districts_2022/FeatureServer",
+      //url: "https://services5.arcgis.com/Oos4pNA2538iVFA1/arcgis/rest/services/NYC_Council_Districts/FeatureServer/0",
       url: "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/ArcGIS/rest/services/NYC_City_Council_Districts/FeatureServer",
       maxScale: 0,
       minScale: 0,
@@ -556,13 +556,14 @@ require([
     function getValuesCcd(response) {
       var features = response.features;
       var values = features.map(function (feature) {
-        return feature.attributes.COUNDIST;
+        return feature.attributes.CounDist;
       });
       return values;
     }
 
     function getUniqueValuesCcd(values) {
       let tempUniqueValues = [];
+
       values.forEach(function (item, i) {
         if (
           (tempUniqueValues.length < 1 || tempUniqueValues.indexOf(item) === -1) &&
@@ -573,12 +574,14 @@ require([
       });
 
       return tempUniqueValues;
+      
     }
+
 
     function addToSelectCcd(values) {
       values.sort();
       values.forEach(function (value) {
-        var option = document.createElement("option");
+        let option = document.createElement("option");
         option.text = `'${value}'`;
         option.label = value;
         option.id = value;
@@ -720,7 +723,7 @@ require([
       resultsLayerPUID.removeAll();
       //puidArray = [];
       //uniquePuidArray = [];
-      params.where = "AGENCYPROJ <> 'NYC ECC' AND COUNDIST IN (" + ccdVar + ") AND " + fieldOne + operator + puidVal.value;
+      params.where = "AGENCYPROJ <> 'NYC ECC' AND CounDist IN (" + ccdVar + ") AND " + fieldOne + operator + puidVal.value;
       console.log(params.where)
       query.executeQueryJSON(ergisUrl, params).then(getResults).catch();
     }
@@ -830,8 +833,8 @@ require([
 
     function doQueryTwo() {
       resultsLayerLPC.removeAll();
-      //paramsTwo.where = "COUNDIST IN (" + ccdVar + ") AND LPCIMPTWO IN (" + lpcImpactValue + ")";
-      paramsTwo.where = "AGENCYPROJ <> 'NYC ECC' AND COUNDIST IN (" + ccdVar + ") AND LPCIMPTWO IN ('LPC ELIGIBLE')";
+      //paramsTwo.where = "CounDist IN (" + ccdVar + ") AND LPCIMPTWO IN (" + lpcImpactValue + ")";
+      paramsTwo.where = "AGENCYPROJ <> 'NYC ECC' AND CounDist IN (" + ccdVar + ") AND LPCIMPTWO IN ('LPC ELIGIBLE')";
       query.executeQueryJSON(ergisUrl, paramsTwo).then(getResultsTwo).catch();
     }
 
@@ -940,8 +943,8 @@ require([
 
     function doQueryThree() {
       resultsLayerFED.removeAll();
-      //paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN (" + fedImpactValue + ")";
-      paramsThree.where = "AGENCYPROJ <> 'NYC ECC' AND COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR Eligible')";
+      //paramsThree.where = "CounDist IN (" + ccdVar + ") AND FEDIMPTWO IN (" + fedImpactValue + ")";
+      paramsThree.where = "AGENCYPROJ <> 'NYC ECC' AND CounDist IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR Eligible')";
       query.executeQueryJSON(ergisUrl, paramsThree).then(getResultsThree).catch();
     }
 
@@ -1029,8 +1032,8 @@ require([
 
     function doQueryFour() {
       resultsLayerFEDTwo.removeAll();
-      //paramsThree.where = "COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN (" + fedImpactValue + ")";
-      paramsFour.where = "AGENCYPROJ <> 'NYC ECC' AND COUNDIST IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR LISTED')";
+      //paramsThree.where = "CounDist IN (" + ccdVar + ") AND FEDIMPTWO IN (" + fedImpactValue + ")";
+      paramsFour.where = "AGENCYPROJ <> 'NYC ECC' AND CounDist IN (" + ccdVar + ") AND FEDIMPTWO IN ('S/NR LISTED')";
       query.executeQueryJSON(ergisUrl, paramsFour).then(getResultsFour).catch();
     }
 
